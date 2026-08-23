@@ -32,6 +32,41 @@ test("register", async () => {
   expect(record.password).not.toBe(payload.password);
 });
 
+test("failed registration", async () => {
+  const payload = { name: "", email: "email", password: "0" };
+  const response = await request(handler)
+    .post("/api/auth/register")
+    .send(payload);
+  expect(response.status).toBe(400);
+  expect(Array.isArray(response.body.errors)).toBe(true);
+  expect(response.body.errors).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({ path: "name" }),
+      expect.objectContaining({ path: "email" }),
+      expect.objectContaining({ path: "password" }),
+    ]),
+  );
+  const count = await User.countDocuments({});
+  expect(count).toBe(0);
+});
+
+test("duplicate email", async () => {
+  const payload = { name: "user", email: "user@mail.com", password: "user123" };
+  const response = await request(handler)
+    .post("/api/auth/register")
+    .send(payload);
+  expect(response.status).toBe(201);
+  const duplicateResponse = await request(handler)
+    .post("/api/auth/register")
+    .send(payload);
+  expect(duplicateResponse.status).toBe(409);
+  expect(duplicateResponse.body).toEqual({
+    message: "email already exists",
+  });
+  const count = await User.countDocuments({});
+  expect(count).toBe(1);
+});
+
 afterEach(async () => {
   await User.deleteMany({});
 });
