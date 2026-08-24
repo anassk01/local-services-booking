@@ -37,10 +37,19 @@ test("createReservation", async () => {
     .send({ service: service._id, date: "2099-12-31", time: "10:00" })
     .set({ Authorization: `Bearer ${loggedUser.body.token}` });
 
+  const duplicateReservation = await request(handler)
+    .post("/api/reservations")
+    .send({ service: service._id, date: "2099-12-31", time: "10:00" })
+    .set({ Authorization: `Bearer ${loggedUser.body.token}` });
+
   expect(reservation.status).toBe(201);
   expect(reservation.body.reservation.status).toBe("pending");
   expect(reservation.body.reservation.service).toBe(service._id.toString());
   expect(reservation.body.reservation.time).toBe("10:00");
+  expect(duplicateReservation.status).toBe(409);
+  expect(duplicateReservation.body).toEqual({
+    message: "Time slot already booked",
+  });
   const countReservations = await Reservation.countDocuments({});
   expect(countReservations).toBe(1);
 });
