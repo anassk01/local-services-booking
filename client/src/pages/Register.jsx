@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { registerUser } from "../services/registerUser";
+import { useNavigate } from "react-router-dom";
 function Register() {
   const [values, setValues] = useState({ name: "", email: "", password: "" });
-  const [data, setData] = useState();
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   function handleChange(event) {
     const name = event.target.name;
     const value = event.target.value;
@@ -12,10 +13,9 @@ function Register() {
   async function handleSubmit(event) {
     event.preventDefault();
     setError(undefined);
-    setData(undefined);
     try {
-      const results = await registerUser(values);
-      setData(results);
+      await registerUser(values);
+      navigate("/login");
     } catch (error) {
       setError(error.response?.data?.message || "Registration failed");
     }
@@ -55,8 +55,6 @@ function Register() {
       </form>
       <div>
         <div>{error ? error : ""}</div>
-        <div> {data?.user?.name}</div>
-        <div> {data?.user?.email}</div>
       </div>
     </>
   );
