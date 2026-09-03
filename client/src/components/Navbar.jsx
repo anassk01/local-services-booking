@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
 function Navbar() {
-  const { user } = useContext(AuthContext);
-
+  const { user, logout } = useContext(AuthContext);
   return (
     <nav>
       <Link to="/">Home</Link>
@@ -13,7 +12,14 @@ function Navbar() {
           <Link to="/register">Register</Link>
         </>
       ) : (
-        user.name
+        <>
+          <div>{user.name}</div>
+          <Link to="/profile">profile</Link>
+
+          <Link to="/" onClick={logout}>
+            logout
+          </Link>
+        </>
       )}
     </nav>
   );
