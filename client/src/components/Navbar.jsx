@@ -6,6 +6,8 @@ function Navbar() {
   return (
     <nav>
       <Link to="/">Home</Link>
+      <Link to="/services">services</Link>
+
       {!user ? (
         <>
           <Link to="/login">Login</Link>
