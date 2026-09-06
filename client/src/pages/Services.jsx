@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getServices } from "../services/getServices";
 import { useEffect } from "react";
 import { getCategories } from "../services/getCategories";
+import { Link } from "react-router-dom";
 export default function Services() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -113,7 +114,8 @@ export default function Services() {
       ) : (
         services.map((m) => (
           <div key={m._id}>
-            {m.title} {m.city} {m.price}
+            <Link to={`/services/${m._id}`}>{m.title}</Link>
+            {m.city} {m.price}
           </div>
         ))
       )}
