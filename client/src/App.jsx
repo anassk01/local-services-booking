@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
 import Services from "./pages/Services";
 import ServiceDetails from "./pages/ServiceDetails";
+import Reservation from "./pages/Reservation";
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/reservation/:id" element={<Reservation />} />
         </Route>
       </Routes>
     </>
