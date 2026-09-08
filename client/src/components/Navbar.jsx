@@ -17,7 +17,7 @@ function Navbar() {
         <>
           <div>{user.name}</div>
           <Link to="/profile">profile</Link>
-
+          <Link to="/reservations">my reservations</Link>
           <Link to="/" onClick={logout}>
             logout
           </Link>
