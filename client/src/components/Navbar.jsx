@@ -7,7 +7,6 @@ function Navbar() {
     <nav>
       <Link to="/">Home</Link>
       <Link to="/services">services</Link>
-
       {!user ? (
         <>
           <Link to="/login">Login</Link>
@@ -21,6 +20,7 @@ function Navbar() {
           <Link to="/" onClick={logout}>
             logout
           </Link>
+          {user.role === "admin" && <Link to="/admin">admin Dashboard</Link>}
         </>
       )}
     </nav>
