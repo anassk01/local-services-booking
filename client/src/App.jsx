@@ -12,6 +12,7 @@ import MyReservations from "./pages/MyReservations";
 import AdminRoute from "./components/AdminRoute";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminServices from "./pages/AdminServices";
+import AdminCreateService from "./pages/AdminCreateService";
 function App() {
   return (
     <>
@@ -32,6 +33,10 @@ function App() {
         <Route element={<AdminRoute />}>
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/services" element={<AdminServices />} />
+          <Route
+            path="/admin/services/create"
+            element={<AdminCreateService />}
+          ></Route>
         </Route>
       </Routes>
     </>
