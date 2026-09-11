@@ -63,6 +63,7 @@ export default function AdminServices() {
               >
                 delete
               </button>
+              <Link to={`/admin/services/${item._id}/edit`}>edit</Link>
             </div>
           );
         })
