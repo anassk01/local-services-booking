@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCategories } from "../services/getCategories";
 import { createCategory } from "../services/createCategory";
+import { deleteCategory } from "../services/deleteCategory";
 function AdminCategories() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +10,10 @@ function AdminCategories() {
   const [createError, setCreateError] = useState(null);
   const [createLoading, setCreateLoading] = useState(false);
   const [created, setCreated] = useState(false);
-
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteError, setDeleteError] = useState(null);
+  const [deleted, setDeleted] = useState(false);
+  const [deletingId, setDeletingId] = useState();
   async function CreateCategory(event) {
     event.preventDefault();
     if (!categoryName.trim()) {
@@ -33,6 +37,25 @@ function AdminCategories() {
       }
     } finally {
       setCreateLoading(false);
+    }
+  }
+  async function DeleteCategory(id) {
+    setDeleteLoading(true);
+    setDeleteError(null);
+    setDeleted(false);
+    try {
+      setDeletingId(id);
+      await deleteCategory(id);
+      setCategories((current) => current.filter((item) => item._id !== id));
+      setDeleted(true);
+    } catch (error) {
+      if (error.response?.status === 409) {
+        setDeleteError("cannot deleted a service still using it");
+      } else {
+        setDeleteError("category cannot be deleted");
+      }
+    } finally {
+      setDeleteLoading(false);
     }
   }
 
@@ -80,16 +103,31 @@ function AdminCategories() {
       ) : error ? (
         error
       ) : categories.length > 0 ? (
-        categories.map((item) => {
-          return (
-            <div key={item._id}>
-              <div>{item.name}</div>
-            </div>
-          );
-        })
+        <>
+          {categories.map((item) => {
+            return (
+              <div key={item._id}>
+                <div>{item.name}</div>
+                <button
+                  disabled={deleteLoading}
+                  onClick={() => DeleteCategory(item._id)}
+                >
+                  delete
+                </button>
+                {deleteLoading && deletingId === item._id && <div>deleing</div>}
+              </div>
+            );
+          })}
+          {deleteLoading ? (
+            <div>deleing ... </div>
+          ) : (
+            deleteError && <div>{deleteError}</div>
+          )}
+        </>
       ) : (
         <div>no categories found</div>
       )}
+      {deleted && <div> category deleted</div>}
     </>
   );
 }
