@@ -15,6 +15,7 @@ import AdminServices from "./pages/AdminServices";
 import AdminCreateService from "./pages/AdminCreateService";
 import AdminEditService from "./pages/AdminEditService";
 import AdminCategories from "./pages/AdminCategories";
+import AdminReservations from "./pages/AdminReservations";
 function App() {
   return (
     <>
@@ -44,6 +45,7 @@ function App() {
             element={<AdminEditService />}
           />
           <Route path="/admin/categories" element={<AdminCategories />} />
+          <Route path="/admin/reservations" element={<AdminReservations />} />
         </Route>
       </Routes>
     </>
