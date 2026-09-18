@@ -18,12 +18,12 @@ function AdminUserDetails() {
       }
     }
     GetUserById();
-  }, []);
+  }, [id]);
 
   return (
     <>
       {loading ? (
-        <div></div>
+        <div>loading ... </div>
       ) : error ? (
         <div>{error}</div>
       ) : Object.values(user).length > 0 ? (
