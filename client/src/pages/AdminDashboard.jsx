@@ -7,6 +7,7 @@ export default function AdminDashboard() {
       <Link to="/admin/services">services</Link>
       <Link to="/admin/categories">categories</Link>
       <Link to="/admin/reservations">reservations</Link>
+      <Link to="/admin/users">Users</Link>
     </>
   );
 }

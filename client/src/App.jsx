@@ -16,6 +16,8 @@ import AdminCreateService from "./pages/AdminCreateService";
 import AdminEditService from "./pages/AdminEditService";
 import AdminCategories from "./pages/AdminCategories";
 import AdminReservations from "./pages/AdminReservations";
+import AdminUsers from "./pages/AdminUsers";
+import AdminUserDetails from "./pages/AdminUserDetails";
 function App() {
   return (
     <>
@@ -46,6 +48,8 @@ function App() {
           />
           <Route path="/admin/categories" element={<AdminCategories />} />
           <Route path="/admin/reservations" element={<AdminReservations />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/users/:id" element={<AdminUserDetails />} />
         </Route>
       </Routes>
     </>
