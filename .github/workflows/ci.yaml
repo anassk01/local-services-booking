@@ -1,0 +1,18 @@
+name: tests and Build
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - working-directory: ./server
+        run: npm ci
+      - working-directory: ./server
+        run: npm run test
+      - working-directory: ./client
+        run: npm ci
+      - working-directory: ./client
+        run: npm run build
