@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const isProduction = import.meta.env.PROD;
+const baseUrl = isProduction ? "/api" : "http://localhost:5000/api";
 const client = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: baseUrl,
 });
 
 client.interceptors.request.use((config) => {
