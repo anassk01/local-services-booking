@@ -1,0 +1,28 @@
+services:
+  mongo:
+    image: mongo:8
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  server:
+    depends_on:
+      mongo:
+        condition: service_healthy
+    build: ./server
+    env_file:
+      - ./server/.env
+    environment:
+      MONGO_URI: mongodb://mongo:27017/local_services
+  client:
+    depends_on:
+      - server
+    build: ./client
+    ports:
+      - "8080:80"
+volumes:
+  mongo_data:
