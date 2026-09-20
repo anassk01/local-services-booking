@@ -4,9 +4,12 @@ function Profile() {
   const { user } = useContext(AuthContext);
   return (
     <>
-      <div>{user.name}</div>
-      <div>{user.email}</div>
-      <div>{user.role}</div>
+      <h2>User Details</h2>
+      <div className="card">
+        <div>Name: {user.name}</div>
+        <div>Email: {user.email}</div>
+        <div>Role: {user.role}</div>
+      </div>
     </>
   );
 }

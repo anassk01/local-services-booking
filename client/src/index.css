@@ -1,0 +1,64 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 1rem auto;
+  padding-inline: 1rem;
+  max-width: 70rem;
+}
+
+nav {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+input,
+select,
+button {
+  font: inherit;
+  padding: 0.6rem;
+}
+
+form {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 32rem;
+}
+
+label {
+  display: grid;
+}
+
+.primary-action {
+  display: inline-block;
+  background-color: #1d4ed8;
+  border-radius: 0.4rem;
+  color: rgb(255, 255, 255);
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+
+.card {
+  border: 1px solid #d1d5db;
+  margin-block: 0.75rem;
+  padding: 0.75rem 1rem;
+  max-width: 30rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.service-thubmail {
+  object-fit: cover;
+  width: 180px;
+  height: 120px;
+}

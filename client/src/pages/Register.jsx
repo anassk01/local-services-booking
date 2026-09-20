@@ -23,6 +23,7 @@ function Register() {
 
   return (
     <>
+      <h2>Create account</h2>
       <form onSubmit={handleSubmit}>
         <label>
           name
@@ -51,7 +52,9 @@ function Register() {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">submit</button>
+        <button className="primary-action" type="submit">
+          Create account
+        </button>
       </form>
       <div>
         <div>{error ? error : ""}</div>

@@ -29,6 +29,7 @@ function Login() {
 
   return (
     <>
+      <h2>Sign in</h2>
       <form onSubmit={onSubmit}>
         <label>
           email
@@ -48,7 +49,9 @@ function Login() {
             onChange={onChange}
           />
         </label>
-        <button type="submit">submit</button>
+        <button className="primary-action" type="submit">
+          Sign in
+        </button>
       </form>
       <div>{error}</div>
     </>
