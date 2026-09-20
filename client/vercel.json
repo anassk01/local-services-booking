@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:rest*",
+      "destination": "https://local-services-booking-backend.onrender.com/api/:rest*"
+    },
+    {
+      "source": "/:segment*",
+      "destination": "/index.html"
+    }
+  ]
+}
