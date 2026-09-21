@@ -126,12 +126,15 @@ async function updateService(request, response) {
         return response.status(404).json({ message: "category not found" });
       }
     }
+    if (image !== undefined) {
+      service.image = image;
+    }
     service.title = title;
     service.description = description;
     service.city = city;
     service.price = price;
     service.category = category;
-    service.image = image;
+
     await service.save();
     await service.populate("category", "name");
     return response.status(200).json({ service });
