@@ -41,6 +41,7 @@ function MyReservations() {
   }, []);
   return (
     <>
+      <h2>My Reservations</h2>
       {loading ? (
         <div>loading...</div>
       ) : error ? (
@@ -48,18 +49,18 @@ function MyReservations() {
       ) : reservations.length > 0 ? (
         reservations.map((item) => {
           return (
-            <div key={item._id}>
+            <div className="card" key={item._id}>
               <div>
-                <div>{item.date}</div>
-                <div>{item.time}</div>
-                <div>{item.status}</div>
+                <div>Date: {item.date.slice(0, 10)}</div>
+                <div>Time: {item.time}</div>
+                <div>Status: {item.status}</div>
 
                 <span>service:</span>
                 <div>
                   <span>title:</span> {item.service.title}
                 </div>
-                <div>{item.service.city}</div>
-                <div>{item.service.price}</div>
+                <div>City: {item.service.city}</div>
+                <div>Price: {item.service.price}</div>
               </div>
               <button
                 disabled={pending && item._id === canceledReservation}

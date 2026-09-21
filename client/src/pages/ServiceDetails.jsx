@@ -33,25 +33,27 @@ function ServiceDetails() {
 
   return (
     <>
+      <h2>Service Details</h2>
       {loading ? (
         <div>Loading ... </div>
       ) : error ? (
         error
       ) : (
-        <div>
-          <div>
-            <span>title: </span>
-            {service.title}
-          </div>
-          <div>{service.description}</div>
-          <div>{service.price}</div> <div>{service.city}</div>
-          <div>{service.category.name}</div>
+        <div className="card">
+          {service.image && (
+            <img src={service.image} alt={service.description} />
+          )}
+          <div>Title: {service.title}</div>
+          <div>Description: {service.description}</div>
+          <div>City: {service.city}</div>
+          <div>Price: {service.price}</div>
+          <div>Category: {service.category.name}</div>
+          {token && Object.values(service).length > 0 && !loading && !error && (
+            <Link className="primary-action" to={`/reservation/${service._id}`}>
+              Reserve
+            </Link>
+          )}
         </div>
-      )}
-      {token && Object.values(service).length > 0 && !loading && !error ? (
-        <Link to={`/reservation/${service._id}`}>Reserve</Link>
-      ) : (
-        <div></div>
       )}
     </>
   );

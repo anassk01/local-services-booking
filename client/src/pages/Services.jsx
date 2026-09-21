@@ -61,6 +61,7 @@ export default function Services() {
 
   return (
     <>
+      <h2>Services</h2>
       <form onSubmit={submitSearch}>
         <label>
           search
@@ -103,7 +104,9 @@ export default function Services() {
           )}
         </label>
 
-        <button type="submit">submit</button>
+        <button className="primary-action" type="submit">
+          search
+        </button>
       </form>
       {loading ? (
         <p>Loading... </p>
@@ -112,10 +115,18 @@ export default function Services() {
       ) : services.length === 0 ? (
         <p>no services available</p>
       ) : (
-        services.map((m) => (
-          <div key={m._id}>
-            <Link to={`/services/${m._id}`}>{m.title}</Link>
-            {m.city} {m.price}
+        services.map((service) => (
+          <div className="card" key={service._id}>
+            {service.image && (
+              <img
+                className="service-thubmail"
+                src={service.image}
+                alt={service.description}
+              />
+            )}
+            <Link to={`/services/${service._id}`}>{service.title}</Link>
+            <div>City: {service.city}</div>
+            <div>Price: {service.price}</div>
           </div>
         ))
       )}

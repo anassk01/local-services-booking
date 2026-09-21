@@ -42,9 +42,10 @@ function Reservation() {
 
   return (
     <>
-      <div>Reserve this service</div>
+      <h2>Reserve this service</h2>
       <form onSubmit={submitReservation}>
         <label>
+          date
           <input
             type="date"
             required
@@ -53,6 +54,7 @@ function Reservation() {
           />
         </label>
         <label>
+          time
           <input
             type="time"
             required
@@ -60,8 +62,8 @@ function Reservation() {
             value={time}
           />
         </label>
-        <button type="submit" disabled={busy}>
-          Send
+        <button className="primary-action" type="submit" disabled={busy}>
+          reserve
         </button>
       </form>
       {busy ? (
@@ -69,10 +71,10 @@ function Reservation() {
       ) : error ? (
         error
       ) : Object.keys(reservation).length > 0 ? (
-        <div>
-          <div>{reservation.status} </div>
-          <div>{reservation.time} </div>
-          <div>{reservation.date} </div>
+        <div className="card">
+          <div>Status: {reservation.status} </div>
+          <div>Time: {reservation.time} </div>
+          <div>Date: {reservation.date.slice(0, 10)} </div>
         </div>
       ) : (
         <div></div>
