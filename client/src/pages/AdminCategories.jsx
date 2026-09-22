@@ -108,7 +108,9 @@ function AdminCategories() {
 
   return (
     <>
-      <form onSubmit={CreateCategory}>
+      <h2>Categories Management</h2>
+      <form className="card" onSubmit={CreateCategory}>
+        <div>Create Category: </div>
         <label>
           Category Name
           <input
@@ -118,8 +120,12 @@ function AdminCategories() {
             onChange={(event) => setCategoryName(event.target.value)}
           />
         </label>
-        <button disabled={createLoading} type="submit">
-          submit
+        <button
+          className="primary-action"
+          disabled={createLoading}
+          type="submit"
+        >
+          Create
         </button>
       </form>
       {createLoading ? (
@@ -138,6 +144,7 @@ function AdminCategories() {
           {categories.map((item) => {
             return (
               <form
+                className="card"
                 key={item._id}
                 onSubmit={(event) =>
                   UpdateCategory(item._id, draftUpdateName, event)
@@ -145,14 +152,18 @@ function AdminCategories() {
               >
                 {item._id === updateClicked ? (
                   <div>
-                    <input
-                      type="text"
-                      value={draftUpdateName}
-                      onChange={(event) =>
-                        setDraftUpdateName(event.target.value)
-                      }
-                    />
+                    <label>
+                      Category Name{" "}
+                      <input
+                        type="text"
+                        value={draftUpdateName}
+                        onChange={(event) =>
+                          setDraftUpdateName(event.target.value)
+                        }
+                      />
+                    </label>
                     <button
+                      className="primary-action"
                       disabled={updateLoading && updateClicked === item._id}
                       type="submit"
                     >
@@ -162,27 +173,29 @@ function AdminCategories() {
                 ) : (
                   <div>{item.name}</div>
                 )}
-                <button
-                  type="button"
-                  disabled={updateLoading}
-                  value={item._id}
-                  onClick={(event) => {
-                    setUpdateClicked(event.target.value);
-                    setDraftUpdateName(item.name);
-                  }}
-                >
-                  update
-                </button>
-                <button
-                  type="button"
-                  disabled={deleteLoading}
-                  onClick={() => DeleteCategory(item._id)}
-                >
-                  delete
-                </button>
+                <div className="actions">
+                  <button
+                    type="button"
+                    disabled={updateLoading}
+                    value={item._id}
+                    onClick={(event) => {
+                      setUpdateClicked(event.target.value);
+                      setDraftUpdateName(item.name);
+                    }}
+                  >
+                    update
+                  </button>
+                  <button
+                    type="button"
+                    disabled={deleteLoading}
+                    onClick={() => DeleteCategory(item._id)}
+                  >
+                    delete
+                  </button>
+                </div>
                 {deleteLoading && deletingId === item._id && <div>deleing</div>}
                 {updateLoading && updateClicked === item._id && (
-                  <div>deleing</div>
+                  <div>Saving...</div>
                 )}
               </form>
             );

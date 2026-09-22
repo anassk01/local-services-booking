@@ -43,7 +43,10 @@ export default function AdminServices() {
 
   return (
     <>
-      <Link to="/admin/services/create">create service</Link>
+      <h2>Services Management</h2>
+      <Link className="primary-action" to="/admin/services/create">
+        create service
+      </Link>
       {loading ? (
         <div>Loading</div>
       ) : error ? (
@@ -51,19 +54,28 @@ export default function AdminServices() {
       ) : services.length > 0 ? (
         services.map((item) => {
           return (
-            <div key={item._id}>
-              <div>{item.title}</div>
-              <div>{item.city}</div>
-              <div>{item.price}</div>
-              <div>{item.category.name}</div>
-              <button
-                type="button"
-                onClick={() => submitDeletion(item._id)}
-                disabled={loadingDelete && item._id === deletedService}
-              >
-                delete
-              </button>
-              <Link to={`/admin/services/${item._id}/edit`}>edit</Link>
+            <div className="card" key={item._id}>
+              {item.image && (
+                <img
+                  className="service-thubmail"
+                  src={item.image}
+                  alt={item.description}
+                />
+              )}
+              <div>Title: {item.title}</div>
+              <div>City: {item.city}</div>
+              <div>Price: {item.price}</div>
+              <div>Category: {item.category.name}</div>
+              <div className="actions">
+                <button
+                  type="button"
+                  onClick={() => submitDeletion(item._id)}
+                  disabled={loadingDelete && item._id === deletedService}
+                >
+                  delete
+                </button>
+                <Link to={`/admin/services/${item._id}/edit`}>Edit</Link>
+              </div>
             </div>
           );
         })

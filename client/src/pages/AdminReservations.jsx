@@ -42,6 +42,7 @@ function AdminReservations() {
   }, [lastUpdatedReservation]);
   return (
     <>
+      <h2>Reservations management</h2>
       {loading ? (
         <div>loading...</div>
       ) : error ? (
@@ -49,7 +50,7 @@ function AdminReservations() {
       ) : reservations.length > 0 ? (
         reservations.map((item) => {
           return (
-            <div key={item._id}>
+            <div className="card" key={item._id}>
               <div>
                 <button
                   disabled={clickStatus}
@@ -63,29 +64,32 @@ function AdminReservations() {
                 </button>
                 {clickStatus === item._id ? (
                   <div>
-                    <select
-                      name=""
-                      value={changedStatus}
-                      onChange={(event) => setChangedStatus(event.target.value)}
-                    >
-                      <option value="pending">pending</option>
-                      <option value="confirmed">confirmed</option>
-                      <option value="completed">completed</option>
-                      <option value="cancelled">cancelled</option>
-                    </select>
-                    <button type="button" onClick={() => setClickStatus()}>
-                      cancel
-                    </button>
-
-                    <button
-                      type="submit"
-                      disabled={updateProgress}
-                      onClick={() =>
-                        UpdateReservationStatus(item._id, changedStatus)
-                      }
-                    >
-                      change
-                    </button>
+                    <div className="actions">
+                      <select
+                        name=""
+                        value={changedStatus}
+                        onChange={(event) =>
+                          setChangedStatus(event.target.value)
+                        }
+                      >
+                        <option value="pending">pending</option>
+                        <option value="confirmed">confirmed</option>
+                        <option value="completed">completed</option>
+                        <option value="cancelled">cancelled</option>
+                      </select>
+                      <button type="button" onClick={() => setClickStatus()}>
+                        cancel
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={updateProgress}
+                        onClick={() =>
+                          UpdateReservationStatus(item._id, changedStatus)
+                        }
+                      >
+                        change
+                      </button>
+                    </div>
                     {updateProgress ? (
                       <div>updaing...</div>
                     ) : (
@@ -93,15 +97,15 @@ function AdminReservations() {
                     )}
                   </div>
                 ) : (
-                  <div>{item.status}</div>
+                  <div>Status: {item.status}</div>
                 )}
               </div>
 
-              <div>{item.user.name}</div>
-              <div>{item.user.email}</div>
-              <div>{item.service.title}</div>
-              <div>{item.date}</div>
-              <div>{item.time}</div>
+              <div>User Name : {item.user.name}</div>
+              <div>User Email: {item.user.email}</div>
+              <div>Service Title: {item.service.title}</div>
+              <div>Reservation Date: {item.date.slice(0, 10)}</div>
+              <div>Reservation Time: {item.time}</div>
             </div>
           );
         })

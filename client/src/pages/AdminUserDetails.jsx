@@ -22,15 +22,16 @@ function AdminUserDetails() {
 
   return (
     <>
+      <h2>User Details</h2>
       {loading ? (
         <div>loading ... </div>
       ) : error ? (
         <div>{error}</div>
       ) : Object.values(user).length > 0 ? (
-        <div>
-          <div>{user.name}</div>
-          <div>{user.email}</div>
-          <div>{user.role}</div>
+        <div className="card">
+          <div>Name: {user.name}</div>
+          <div>Email: {user.email}</div>
+          <div>Role: {user.role}</div>
         </div>
       ) : (
         <div>cannot retrieve user details </div>

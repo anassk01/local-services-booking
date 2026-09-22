@@ -46,6 +46,7 @@ function AdminUsers() {
   }, [deleted]);
   return (
     <>
+      <h2>Users Management</h2>
       {loading ? (
         <div>loading...</div>
       ) : error ? (
@@ -54,20 +55,28 @@ function AdminUsers() {
         <div>
           {users.map((item) => {
             return (
-              <div key={item._id}>
-                <div>{item.name}</div>
-                <div>{item.email}</div>
-                <div>{item.role}</div>
-                <Link to={`/admin/users/${item._id}`}>details</Link>
-                <button
-                  disabled={deleteLoading}
-                  onClick={() => {
-                    DeleteUser(item._id);
-                    setPendingId(item._id);
-                  }}
-                >
-                  delete
-                </button>
+              <div className="card" key={item._id}>
+                <div>Name: {item.name}</div>
+                <div>Email: {item.email}</div>
+                <div>Role: {item.role}</div>
+                <div className="actions">
+                  {" "}
+                  <Link
+                    className="primary-action"
+                    to={`/admin/users/${item._id}`}
+                  >
+                    details
+                  </Link>
+                  <button
+                    disabled={deleteLoading}
+                    onClick={() => {
+                      DeleteUser(item._id);
+                      setPendingId(item._id);
+                    }}
+                  >
+                    delete
+                  </button>
+                </div>
                 {item._id === pendingId && <div>pending ... </div>}
               </div>
             );
