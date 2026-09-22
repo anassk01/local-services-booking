@@ -119,7 +119,7 @@ export default function Services() {
           <div className="card" key={service._id}>
             {service.image && (
               <img
-                className="service-thubmail"
+                className="service-thumbnail"
                 src={service.image}
                 alt={service.description}
               />

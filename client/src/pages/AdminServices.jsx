@@ -57,7 +57,7 @@ export default function AdminServices() {
             <div className="card" key={item._id}>
               {item.image && (
                 <img
-                  className="service-thubmail"
+                  className="service-thumbnail"
                   src={item.image}
                   alt={item.description}
                 />
