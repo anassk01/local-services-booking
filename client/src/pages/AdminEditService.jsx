@@ -12,6 +12,7 @@ export default function AdminEditService() {
   const [description, setDescription] = useState("");
   const [city, setCity] = useState("");
   const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
   const [loadingEdit, setloadingEdit] = useState(false);
   const [errorEdit, setErrorEdit] = useState(null);
@@ -46,6 +47,7 @@ export default function AdminEditService() {
         setCity(results.city);
         setPrice(results.price);
         setCategory(results.category._id);
+        setImage(results.image ?? "");
       } catch {
         setError("cannot get service");
       } finally {
@@ -67,6 +69,7 @@ export default function AdminEditService() {
       description: description,
       city: city,
       price: price,
+      image: image,
       category: category,
     };
 
@@ -77,6 +80,7 @@ export default function AdminEditService() {
       setDescription(result.description);
       setCity(result.city);
       setPrice(result.price);
+      setImage(result.image ?? "");
       setCategory(result.category._id);
       setEditied(true);
     } catch {
@@ -88,13 +92,13 @@ export default function AdminEditService() {
 
   return (
     <>
+      <h2>Edit Service</h2>
       {loading ? (
         <div>Loading</div>
       ) : error ? (
         error
       ) : Object.values(service).length > 0 ? (
         <div>
-          <div>edit service</div>
           <form onSubmit={EditService}>
             <label>
               title
@@ -134,11 +138,20 @@ export default function AdminEditService() {
             </label>
 
             <label>
-              {categoriesLoading ? (
-                <div>Loading... </div>
-              ) : categoriesError ? (
-                <div>{categoriesError}</div>
-              ) : (
+              Image Url:
+              <input
+                type="text"
+                value={image}
+                onChange={(event) => setImage(event.target.value)}
+              />
+            </label>
+            {categoriesLoading ? (
+              <div>Loading... </div>
+            ) : categoriesError ? (
+              <div>{categoriesError}</div>
+            ) : (
+              <label>
+                Category:
                 <select
                   required
                   name="category"
@@ -155,11 +168,15 @@ export default function AdminEditService() {
                       );
                     })}
                 </select>
-              )}
-            </label>
+              </label>
+            )}
 
-            <button disabled={loadingEdit} type="submit">
-              submit
+            <button
+              className="primary-action"
+              disabled={loadingEdit}
+              type="submit"
+            >
+              Save Changes
             </button>
           </form>
         </div>

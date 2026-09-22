@@ -7,6 +7,7 @@ function AdminCreateService() {
   const [description, setDescription] = useState("");
   const [city, setCity] = useState("");
   const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [service, setService] = useState({});
@@ -44,6 +45,7 @@ function AdminCreateService() {
       price: price,
       city: city,
       category: category,
+      image: image,
     };
 
     try {
@@ -57,10 +59,10 @@ function AdminCreateService() {
   }
   return (
     <>
-      <div> create service </div>
+      <h2>create service</h2>
       <form onSubmit={CreateService}>
         <label>
-          title
+          Title:
           <input
             required
             type="text"
@@ -70,7 +72,7 @@ function AdminCreateService() {
           />
         </label>
         <label>
-          description
+          Description:
           <input
             required
             type="text"
@@ -81,7 +83,7 @@ function AdminCreateService() {
         </label>
 
         <label>
-          city
+          City:
           <input
             required
             type="text"
@@ -91,7 +93,7 @@ function AdminCreateService() {
           />
         </label>
         <label>
-          price
+          Price:
           <input
             required
             type="number"
@@ -100,12 +102,23 @@ function AdminCreateService() {
             onChange={(event) => setPrice(event.target.value)}
           />
         </label>
+
         <label>
-          {categoriesLoading ? (
-            <div>Loading... </div>
-          ) : categoriesError ? (
-            <div>{categoriesError}</div>
-          ) : (
+          Image:
+          <input
+            type="text"
+            name="image"
+            value={image}
+            onChange={(event) => setImage(event.target.value)}
+          />
+        </label>
+        {categoriesLoading ? (
+          <div>Loading... </div>
+        ) : categoriesError ? (
+          <div>{categoriesError}</div>
+        ) : (
+          <label>
+            Category
             <select
               required
               name="category"
@@ -122,10 +135,10 @@ function AdminCreateService() {
                   );
                 })}
             </select>
-          )}
-        </label>
-        <button type="submit" disabled={pending}>
-          submit
+          </label>
+        )}
+        <button className="primary-action" type="submit" disabled={pending}>
+          Create Service
         </button>
       </form>
 
@@ -133,12 +146,16 @@ function AdminCreateService() {
         <div>{serviceError}</div>
       ) : (
         Object.values(service).length > 0 && (
-          <div>
-            <div>service created Details</div>
-            <div>{service.title}</div>
-            <div>{service.description}</div>
-            <div>{service.city}</div>
-            <div>{service.price}</div>
+          <div className="card">
+            {service.image && (
+              <img src={service.image} alt={service.description} />
+            )}
+            <div>service created </div>
+            <div>Details</div>
+            <div>Title: {service.title}</div>
+            <div>Description: {service.description}</div>
+            <div>City: {service.city}</div>
+            <div>Price: {service.price}</div>
           </div>
         )
       )}
