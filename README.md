@@ -105,5 +105,8 @@ The diagrams below describe the actors, data relationships, and login flow. Edit
 ---
 
 ## Deployments
-- **Frontend:** [Vercel Deployment URL]
-- **Backend:** [Render Deployment URL]
+
+- **Frontend:** [Live application on Vercel](https://local-services-booking.vercel.app/)
+- **Backend:** [REST API on Render](https://local-services-booking-backend.onrender.com/api/services)
+
+The frontend forwards `/api/*` requests to the Render backend through the rewrites in [`client/vercel.json`](client/vercel.json).
