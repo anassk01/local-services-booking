@@ -1,0 +1,35 @@
+@startuml usecases
+left to right direction
+actor "Admin" as AD
+actor "User" as UR
+rectangle "local-Services-booking"{
+usecase "create account" as REGISTER
+usecase "sign in" as LOGIN  
+usecase "view services " as VSERVICES
+usecase "view services details" as VSERVICESD
+usecase "view own reservation" as MYRESERVATION
+usecase "Manage users" as ADUSERS
+usecase "Manage categories" as ADCATEGORIES
+usecase "Manage services" as ADSERVICES
+usecase "change reservation status" as ADRESERVATIONS
+usecase "reserve services" as URRESERVE
+usecase "Cancel reservation" as USRCRESERVE
+usecase "search services" as URSERVICE
+}
+UR -- REGISTER
+UR -- LOGIN
+AD -- LOGIN
+UR -- VSERVICESD
+UR -- VSERVICES
+AD -- VSERVICESD
+AD -- VSERVICES
+UR -- MYRESERVATION
+AD -- ADUSERS
+AD -- ADCATEGORIES
+AD -- ADSERVICES
+AD -- ADRESERVATIONS 
+UR -- URRESERVE
+UR -- USRCRESERVE
+UR -- URSERVICE
+
+@enduml

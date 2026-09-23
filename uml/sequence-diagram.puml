@@ -1,0 +1,15 @@
+@startuml sequences
+actor "User" as UR
+participant "frontend React" as FE
+participant "backend express" as BE
+database "database mongoDb" as DB
+
+UR -> FE : submit login form
+FE -> BE : http request "POST /api/auth/login" 
+BE -> DB : query db with email
+DB --> BE : user record
+BE -->BE : verify password & sign JWT
+BE --> FE : send token and user
+FE --> UR : store token and update UI
+
+@enduml

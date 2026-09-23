@@ -1,0 +1,28 @@
+@startuml classes
+left to right direction
+class User {
+    name : String
+    email : String
+    password : String
+    role:String
+}
+class Category {
+    name : String
+}
+class Service {
+    title : String
+    description : String
+    city : String
+    price : Number
+    image: String
+}
+class Reservation {
+    status : String
+    date : Date
+    time : String
+}
+
+Service "0..*" --> "1" Category : classified under
+Reservation "0..*" --> "1" User : booked by
+Reservation "0..*" --> "1" Service : concerns
+@enduml
