@@ -4,9 +4,9 @@ import { useContext } from "react";
 function Navbar() {
   const { user, logout } = useContext(AuthContext);
   return (
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/services">services</Link>
+    <nav aria-label="Main navigation">
+      <Link className="nav-home" to="/">Home</Link>
+      <Link to="/services">Services</Link>
       {!user ? (
         <>
           <Link to="/login">Login</Link>
@@ -15,12 +15,12 @@ function Navbar() {
       ) : (
         <>
           <div>{user.name}</div>
-          <Link to="/profile">profile</Link>
-          <Link to="/reservations">my reservations</Link>
+          <Link to="/profile">Profile</Link>
+          <Link to="/reservations">My reservations</Link>
           <Link to="/" onClick={logout}>
-            logout
+            Logout
           </Link>
-          {user.role === "admin" && <Link to="/admin">admin Dashboard</Link>}
+          {user.role === "admin" && <Link to="/admin">Admin dashboard</Link>}
         </>
       )}
     </nav>
